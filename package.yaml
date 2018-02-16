@@ -35,6 +35,7 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - open-union
+    - either
 
 tests:
   open-union-prac-test:
