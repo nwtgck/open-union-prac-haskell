@@ -2,6 +2,8 @@
 
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE FlexibleInstances #-}
+
 
 module Main where
 
@@ -20,3 +22,15 @@ main = do
     putStrLn $ showMyUnion $ liftUnion (4 :: Int)
     putStrLn $ showMyUnion $ liftUnion 'a'
     putStrLn $ showMyUnion $ liftUnion [(), ()]
+
+    let a = liftUnion (4 :: Int) :: Union '[Char, Int, [()]]
+    let b = liftUnion ('a' )     :: Union '[Char, Int, [()]]
+    let c :: Union '[Char, Int, [()], Bool]
+        c = reUnion b
+    let d :: Either (Union '[Char, Int]) [()]
+        d = restrict b
+    print a
+    print b
+    print c
+    print d    
+    return ()
