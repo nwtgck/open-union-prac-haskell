@@ -1,8 +1,4 @@
--- (from: https://github.com/bfops/open-union)
-
-{-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE DataKinds #-}
-
 
 module SimplePrac where
 
@@ -30,4 +26,14 @@ main = do
     let intOrBoolOrChar1 :: Union '[Int, Bool, Char]
         intOrBoolOrChar1 = reUnion charOrInt1
     print intOrBoolOrChar1
-    -- Union (35 :: Int)
+    -- => Union (35 :: Int)
+
+    let hList1 :: [ Union '[Maybe Bool, String, ()] ]
+        hList1 = [ liftUnion "apple"
+                 , liftUnion (Just True)
+                 , liftUnion ()
+                 , liftUnion "orange"
+                 , liftUnion (Nothing :: Maybe Bool)
+                 ]
+    print hList1
+    -- => [Union ("apple" :: [Char]),Union (Just True :: Maybe Bool),Union (() :: ()),Union ("orange" :: [Char]),Union (Nothing :: Maybe Bool)]
